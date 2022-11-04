@@ -1,21 +1,23 @@
+import '../styles/globals.css'
+
 import { useState } from 'react'
 import { getAuth, signInWithCustomToken } from "firebase/auth";
-import { app } from './firebase/conf';
+import app from '../firebase/conf';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 const auth = getAuth(app);
 const storage = getStorage();
 const starsRef = ref(storage, "59e598cbe8e14d39eaa0475b59dec58e.svg");
 
-const logger = (user:any): any => {
-  return fetch("http://localhost:3000/api/login", {
-    method: "POST", 
+const logger = (user: any): any => {
+  return fetch("http://localhost:8000/api/login", {
+    method: "POST",
     body: JSON.stringify(user),
-    headers: { "Content-type": "application/json; charset=UTF-8"}
+    headers: { "Content-type": "application/json; charset=UTF-8" }
   })
-  .then((response) =>  response.json())
-  .then(json => json)
-  .catch((e) => console.log(e.error))
+    .then((response) => response.json())
+    .then(json => json)
+    .catch((e) => console.log(e.error))
 }
 
 const img = () => {
@@ -28,22 +30,20 @@ const img = () => {
     .catch((error) => {
       console.log("Error => " + error)
     });
-  
+
 }
 
 function App() {
-  
-
   const [user, setUser] = useState({
     email: "",
     password: ""
   })
 
-  const [ imgV, setImg] = useState('')
+  const [imgV, setImg] = useState('')
 
   const handleClick = async (e: any) => {
     e.preventDefault()
-    const {token, username} = await logger(user);
+    const { token, username } = await logger(user);
     console.log(token)
 
     signInWithCustomToken(auth, token)
@@ -52,7 +52,8 @@ function App() {
         console.log(userCredential)
         // ...
         img().then((resp) => {
-          if(resp) setImg(resp)
+          console.log(resp)
+          setImg(resp)
         })
       })
       .catch((error) => {
@@ -75,15 +76,16 @@ function App() {
   return (
     <div>
       <form>
-        <input type="text" name="email" onChange={handleChange}/>
-        <input type="password" name="password" onChange={handleChange}/>
+        <input type="text" name="email" onChange={handleChange} />
+        <input type="password" name="password" onChange={handleChange} />
         <button onClick={(e) => handleClick(e)}>Login</button>
       </form>
       <div>
-        <img src={imgV}/>
+        <img src={imgV} />
       </div>
     </div>
   )
 }
 
-export default App
+
+export default App;

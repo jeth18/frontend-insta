@@ -1,25 +1,23 @@
 {
-  "name": "frontend-insta",
+  "name": "frontend",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "dotenv": "^16.0.3",
-    "firebase": "^9.12.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "salted-md5": "^4.0.3"
-  },
-  "devDependencies": {
-    "@types/react": "^18.0.22",
-    "@types/react-dom": "^18.0.7",
-    "@vitejs/plugin-react": "^2.2.0",
-    "typescript": "^4.6.4",
-    "vite": "^3.2.0"
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.24",
+    "@types/react-dom": "18.0.8",
+    "eslint": "8.26.0",
+    "eslint-config-next": "13.0.2",
+    "firebase": "^9.13.0",
+    "next": "13.0.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "4.8.4"
   }
 }
